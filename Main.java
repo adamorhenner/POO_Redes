@@ -80,7 +80,7 @@ public class Main {
         portas.add(porta1);
         portas.add(porta2);
 
-        roteador1 = new Roteador(portas, "Roteador-1", "192.145.200.1");
+        roteador1 = new Roteador(portas, "Roteador-1", "13.13.13.1");
     }
     public static void criar_roteador2() {
         PortaSwitch porta1 = new PortaSwitch(1, "PORTA:4:1");
@@ -90,7 +90,7 @@ public class Main {
         portas.add(porta1);
         portas.add(porta2);
 
-        roteador2 = new Roteador(portas, "Roteador-2","195.142.250.1");
+        roteador2 = new Roteador(portas, "Roteador-2","14.14.14.1");
     }
 
     public static void inserir_tabela_de_rota(){
