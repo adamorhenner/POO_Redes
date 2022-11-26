@@ -8,9 +8,12 @@ public class Switch implements Conexao, ProtocoloARPImplementacao {
     private ArrayList<PortaSwitch> portas = new ArrayList();
     private Set<RegistroMAC> tabelaMAC = new HashSet<>();
 
+    private String nome;
 
-    public Switch(ArrayList<PortaSwitch> portas) {
+
+    public Switch(ArrayList<PortaSwitch> portas, String nome) {
         this.portas = portas;
+        this.nome = nome;
     }
 
     @Override
@@ -21,7 +24,7 @@ public class Switch implements Conexao, ProtocoloARPImplementacao {
          for (PortaSwitch porta : this.portas){
 
             if(porta.getHost() != host){
-                if(porta.getHost().verificarPacote(pacote, porta.getHost())){
+                if(porta.getHost().verificarPacote(pacote, this)){
                     souEu = true;
                     break;
                 }

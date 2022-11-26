@@ -3,12 +3,15 @@ import java.util.List;
 
 public class Roteador extends Switch {
 
+    private String ip;
+
     private List<RegistroRotas> tabelaRota = new ArrayList<>();
 
     private RegistroRotas rotaAtual;
 
-    public Roteador(ArrayList<PortaSwitch> portas) {
-        super(portas);
+    public Roteador(ArrayList<PortaSwitch> portas, String nome, String ip) {
+        super(portas, nome);
+        this.ip = ip;
     }
 
     @Override
@@ -24,6 +27,7 @@ public class Roteador extends Switch {
     @Override
     public void enviarPacote(Pacote pacote){
         System.out.println("Roteador enviando pacote");
+//        pacote.setIpOrigem(this.ip);
         rotaAtual.getInterfaceDaRota().receberPacote(pacote);
     }
 
