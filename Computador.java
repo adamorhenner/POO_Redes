@@ -87,11 +87,11 @@ public class Computador implements Host{
     }
 
     @Override
-    public boolean verificarEnderecoMAC(String enderecoMAC, Host host){
+    public boolean verificarPacote(Pacote pacote, Host host){
 
         boolean souEu = false;
 
-        if (this.enderecoMAC.equals(enderecoMAC)){
+        if (this.enderecoMAC.equals(pacote.getEnderecoMACOrigem())){
             souEu = true;
         }
 

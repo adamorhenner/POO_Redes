@@ -90,7 +90,7 @@ public class VerificadorIp {
                 System.out.println("Insira o Endereco de ip: ");
                 String ip = in.nextLine();
 
-                //verificarListaRedes(ip);
+//                verificarListaRedes(ip);
 
 
             }
@@ -101,7 +101,8 @@ public class VerificadorIp {
         }
     }
 
-    public static boolean verificarListaRedes(String ip, List<RegistroRotas> enderecoRedeList) {
+    public static RegistroRotas verificarListaRedes(String ip, List<RegistroRotas> enderecoRedeList) {
+
         boolean resultado = false;
 
         List<RegistroRotas> contemIp = new ArrayList<>();
@@ -126,11 +127,7 @@ public class VerificadorIp {
             }
         }
 
-        if (enderecoRedeEspecifico != null){
-            resultado = true;
-        }
-
-        return resultado;
+        return enderecoRedeEspecifico;
     }
 
     private static boolean verificaRedePertenceIp(String ip, String rede, int cidr) {

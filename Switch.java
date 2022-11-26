@@ -14,19 +14,18 @@ public class Switch implements Conexao, ProtocoloARPImplementacao {
     }
 
     @Override
-    public boolean verificarEnderecoMAC(String enderecoMAC, Host host) {
+    public boolean verificarPacote(Pacote pacote, Host host) {
 
         boolean souEu = false;
 
          for (PortaSwitch porta : this.portas){
 
             if(porta.getHost() != host){
-                if(porta.getHost().verificarEnderecoMAC(enderecoMAC, porta.getHost())){
+                if(porta.getHost().verificarPacote(pacote, porta.getHost())){
                     souEu = true;
                     break;
                 }
             }
- 
         }
 
         return souEu;
@@ -40,22 +39,17 @@ public class Switch implements Conexao, ProtocoloARPImplementacao {
 
         for(PortaSwitch porta: this.portas){
 
-            if(!porta.getHost().verificarEnderecoMAC(pacote.getEnderecoMACOrigem(), this)){
+            if(!porta.getHost().verificarPacote(pacote, this)){
 
                 Host host = porta.getHost();
                 host.receberPacote(pacote);
-
             }
         }
-
     }
 
     @Override
     public void receberPacote(Pacote pacote) {
-
         gravarNaTabelaMac(pacote);
-
-
         if(pacote.getenderecoMACDestino().equals(ProtocoloARP.broadcastMAC)){
             broadcast(pacote);
         }else{
@@ -67,7 +61,7 @@ public class Switch implements Conexao, ProtocoloARPImplementacao {
     public void gravarNaTabelaMac(Pacote pacote){
 
         for (PortaSwitch porta : this.portas){
-            if(porta.getHost().verificarEnderecoMAC(pacote.getEnderecoMACOrigem(), this)){
+            if(porta.getHost().verificarPacote(pacote, this)){
                 RegistroMAC registroMAC = new RegistroMAC(pacote.getEnderecoMACOrigem(), porta);
                 this.tabelaMAC.add(registroMAC);
                 break;
